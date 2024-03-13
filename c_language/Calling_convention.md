@@ -221,7 +221,8 @@ sub:                                    # @sub
 ```
 ### call and ret
 CALL pushes the return address onto the stack and transfers control to a procedure.
-RET pops the return address off the stack and returns control to that location.
+RET pops the return address off the stack and returns control to that location.  
+call and ret use the stack and the IP register. Remember the IP register always hold the address of the next instruction to be executed. 
 
 ```c
 int sub(int n, int m)
@@ -239,7 +240,8 @@ sub:                                    # @sub
         mov     dword ptr [rbp - 8], esi
         mov     edi, dword ptr [rbp - 4]
         mov     esi, dword ptr [rbp - 8]
-        call    add ;push address of next instruction 
+        call    add ;push IP register contents (address 
+                    ;of next instruction) 
                     ;onto the stack, and pass control 
                     ;to the address of add
         mov     eax, dword ptr [rbp - 4]
@@ -249,6 +251,7 @@ sub:                                    # @sub
         ret         ;return result in eax(32bits) 
                     ;or rax(64bits)
 ```
+ the contents of the last item pushed on the stack is pst item pushed on the stack is put into the IP register and the SP register is adjusted to point to the next newest value. Since normally, what is copied into the IP register is the address of the instruction after the call that we were just discussing, the program continues from that point.
 
 ## c/c++头文件的目的是做什么的
 
