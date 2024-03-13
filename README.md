@@ -1,2 +1,1 @@
-# c-notes
-c-notes
+# notes on OS
